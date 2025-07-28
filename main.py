@@ -1,6 +1,11 @@
-def main():
-    print("Hello from onegramm-backend!")
+from fastapi import FastAPI
+
+from db import create_tables
+
+app = FastAPI()
 
 
-if __name__ == "__main__":
-    main()
+@app.get("/db")
+async def root():
+    await create_tables()
+    return {"msg": "ok"}
